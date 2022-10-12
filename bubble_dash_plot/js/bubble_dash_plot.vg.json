@@ -1,0 +1,87 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/mingsheng2002/3179-Data-Visualisation-Project-2/main/bubble_plot/data/Life%20Expectancy%20Data_bubbleplot.csv"},
+  "hconcat": [
+    {
+      "height": 290,
+      "mark": "tick",
+      "description": "y-axis dash plot",
+      "encoding": {
+        "y": { 
+          "field": "BMI", "type": "quantitative",
+          "axis": { "labels": false, "domain": false, "ticks": false, "grid": false }
+        },
+        "x": { 
+          "field": "Weight status based on BMI", "type": "ordinal",
+          "axis": { "title": "", "labels": false, "domain": false, "ticks": false, "grid": false }
+        },
+        "color": {"field": "Weight status based on BMI", "type": "ordinal"}
+      }
+    },
+    {
+      "vconcat": [
+        {
+          "width": 400,
+          "height": 290,
+          "mark": "point",
+          "description": "Bubble plot",
+          "encoding": {
+            "x":{"field": "Alcohol consumption (litres)", "type": "quantitative",
+                  "axis":{
+                    "title": null
+                  }
+                },
+            "y":{"field": "BMI", "type": "quantitative",
+                  "axis":{
+                    "title": null
+                  }
+                },
+            "size": {
+              "field": "Life expectancy (age)", 
+              "type": "quantitative",
+              "title": ["", "", "Life", "expectancy", "(age)",""],
+              "scale":{
+                "rangeMax": 500
+              }
+            },
+            "color":{
+              "field":"Weight status based on BMI", 
+              "type": "ordinal",
+              "title": ["Weight status", "based on BMI", ""],
+              "scale":{
+                "domain": ["Underweight","Normal/Healthy","Overweight","Obese"],
+                "range": ["#08306b","#6baed6","#f4a582","#ca0020"]
+              }
+            },
+            "opacity": {"value":0.5}
+          }
+        },
+        {
+          "width": 400,
+          "mark": "tick",
+          "description": "x-axis dash plot",
+          "encoding": {
+            "x": { 
+              "field": "Alcohol consumption (litres)", "type": "quantitative",
+              "axis": { "labels": false, "domain": false, "ticks": false , "grid": false}
+            },
+            "y": { 
+              "field": "Weight status based on BMI", "type": "ordinal",
+              "axis": { "title": "", "labels": false, "domain": false, "ticks": false, "grid": false }
+            },
+            "color": {"field": "Weight status based on BMI", "type": "ordinal"}
+          }
+        }
+      ]
+    }
+  ],
+  "transform": [{"filter":"datum['Alcohol consumption (litres)'] > 0"}],
+  "config": {
+    "view": { "strokeWidth": 0 },
+    "axis": { 
+      "gridWidth": 0.3, "domainColor": "lightgray", "tickColor": "lightgray"
+    },
+    "axisY": { "titlePadding": -15 },
+    "axisX": { "titlePadding": 10 }
+  }
+}

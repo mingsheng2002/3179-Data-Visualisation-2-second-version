@@ -1,0 +1,222 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "https://raw.githubusercontent.com/mingsheng2002/3179-Data-Visualisation-Project-2/main/radial_plot/data/Life%20Expectancy%20Data_radialplot.csv"},
+    
+    "vconcat": [
+      {
+      "width": 570,
+      "height": 270,
+      "layer":[
+      {
+        "layer": [
+        {
+          "mark": {
+          "type" : "area", "line" : {"color" : "darkblue"}, "point" : {"color" : "darkblue"},
+          "color": {
+              "x1": 1,
+              "y1": 1,
+              "x2": 1,
+              "y2": 0,
+              "gradient": "linear",
+              "stops": [
+                  {
+                  "offset": 0,
+                  "color": "white"
+                  },
+                  {
+                  "offset": 1,
+                  "color": "#3690c0"
+                  }
+              ] 
+            }
+          },
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "temporal",
+              "scale": {"domain": {"param": "brush"}},
+              "axis": {"title": "Year"}
+            },
+            "y": {"field": "Average life expectancy (age)", "type": "quantitative", "title": null}
+          }
+        },
+        {
+          "mark": {"type": "point", "color": "darkblue"},
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "temporal",
+              "scale": {"domain": {"param": "brush"}},
+              "axis": {"title": "Year"}
+            },
+            "y": {"field": "Average life expectancy (age)", "type": "quantitative", "title": null},
+            "tooltip": [{"field":"Year", "type": "temporal", "format": "%Y"}, {"field":"Average life expectancy (age)", "type": "quantitative", "format": ".2f"}]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 8
+          }
+        }
+        ]
+      },
+      {
+        "layer": [
+          {"mark": {
+            "type" : "area", "line" : {"color" : "#d33434"}, "point" : {"color" : "#950000"},
+            "color": {
+                "x1": 1,
+                "y1": 1,
+                "x2": 1,
+                "y2": 0,
+                "gradient": "linear",
+                "stops": [
+                    {
+                    "offset": 0,
+                    "color": "white"
+                    },
+                    {
+                    "offset": 1,
+                    "color": "#ff522f"
+                    }
+                ] 
+              }
+            },
+            "encoding": {
+              "x": {
+                "field": "Year",
+                "type": "temporal",
+                "scale": {"domain": {"param": "brush"}},
+                "axis": {"title": "Year"}
+              },
+              "y": {"field": "Average infant death rate (cases per 1000 population)", "type": "quantitative", "title": null}
+            }
+          },
+          {
+            "mark": {"type": "point", "color": "#950000"},
+            "encoding": {
+              "x": {
+                "field": "Year",
+                "type": "temporal",
+                "scale": {"domain": {"param": "brush"}},
+                "axis": {"title": "Year"}
+              },
+              "y": {"field": "Average infant death rate (cases per 1000 population)", "type": "quantitative", "title": null},
+              "tooltip": [{"field":"Year", "type": "temporal", "format": "%Y"}, {"field":"Average infant death rate (cases per 1000 population)", "type": "quantitative", "format": ".2f"}]
+            }
+          }
+        ]
+      },
+      {
+        "layer": [
+        {
+          "mark": {
+          "type" : "area", "line" : {"color" : "#e5864f"}, "point" : {"color" : "#e57f2c"},
+          "color": {
+              "x1": 1,
+              "y1": 1,
+              "x2": 1,
+              "y2": 0,
+              "gradient": "linear",
+              "stops": [
+                  {
+                  "offset": 0,
+                  "color": "white"
+                  },
+                  {
+                  "offset": 1,
+                  "color": "#ffbe3b"
+                  }
+              ] 
+            }
+          },
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "temporal",
+              "scale": {"domain": {"param": "brush"}},
+              "axis": {"title": null}
+            },
+            "y": {"field": "Average schooling (years)", "type": "quantitative", "title": null}
+          }
+        },
+        {
+          "mark": {"type": "point", "color": "#e57f2c"},
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "temporal",
+              "scale": {"domain": {"param": "brush"}},
+              "axis": {"title": "Year"}
+            },
+            "y": {"field": "Average schooling (years)", "type": "quantitative", "title": null},
+            "tooltip": [{"field":"Year", "type": "temporal", "format": "%Y"}, {"field":"Average schooling (years)", "type": "quantitative", "format": ".2f"}]
+          }
+        }
+      ]
+      }
+    ]
+    }, 
+    {
+      "width": 570,
+      "height": 60,
+      "layer": [
+      {
+        "mark": {"type" : "line", "color" : "darkblue"},
+        "params": [
+          {
+            "name": "brush",
+            "select": {"type": "interval", "encodings": ["x"]}
+          }
+        ],
+        "encoding": {
+          "x": {
+            "field": "Year",
+            "type": "temporal",
+            "title": ""
+          },
+          "y": {
+            "field": "Average life expectancy (age)",
+            "type": "quantitative",
+            "axis": {"tickCount": 3, "grid": false},
+            "title": null
+          }
+        }
+      },
+      {
+        "mark": {"type" : "line", "color" : "#d33434"},
+        "encoding": {
+          "x": {
+            "field": "Year",
+            "type": "temporal",
+            "title": ""
+          },
+          "y": {
+            "field": "Average infant death rate (cases per 1000 population)",
+            "type": "quantitative",
+            "axis": {"tickCount": 3, "grid": false},
+            "title": null
+          }
+        }
+      },
+      {
+        "mark": {"type" : "line", "color" : "#e5864f"},
+        "encoding": {
+          "x": {
+            "field": "Year",
+            "type": "temporal",
+            "title": "Year"
+          },
+          "y": {
+            "field": "Average schooling (years)",
+            "type": "quantitative",
+            "axis": {"tickCount": 3, "grid": false},
+            "title": null
+          }
+        }
+      }
+      ]
+    }
+  ]
+}

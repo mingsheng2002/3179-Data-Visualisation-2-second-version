@@ -1,0 +1,41 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+    "data": {"url": "https://raw.githubusercontent.com/mingsheng2002/3179-Data-Visualisation-Project-2/main/unit_stacked_chart/data/Life%20Expectancy%20Data_unitstackedchart.csv"},
+    "width": 500,
+    "height": 400,
+    "mark": {"type":"rect", "cornerRadius": 10, "strokeMiterLimit": 10},
+    "transform": [
+      {"calculate": "pad(datum.subid, 3, '0', 'left')", "as": "Y"}
+    ], 
+    "encoding": {
+      "x": {
+        "field": "continent_x",
+        "type": "nominal",
+        "axis": {"labelAngle": 0},
+        "title": "Continent",
+        "sort": ["Africa","Asia","Europe","North America","South America","Australia"]
+      },
+      "y":{
+        "field": "Y",
+        "sort": "descending",
+        "type": "ordinal",
+        "axis": null
+      },
+      "color":{
+        "field": "Status",
+        "type": "nominal",
+        "legend": null,
+        "scale": {
+            "domain": ["Below","Above"],
+            "range": ["#fd8d3c","#3690c0"]
+        }
+      },
+      "tooltip": {
+        "field": "Country",
+        "type": "nominal"
+      }
+    },
+    "config":{
+      "view": {"strokeOpacity": 0}
+    }
+  }

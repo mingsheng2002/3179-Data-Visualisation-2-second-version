@@ -1,0 +1,123 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Comparison between the total expenditure spent on health by government in Australia and Malaysia.",
+    "width": 800,
+    "height": 450,
+    "data": {"url": "https://raw.githubusercontent.com/mingsheng2002/3179-Data-Visualisation-Project-2/main/waterfall_chart/data/Life%20Expectancy%20Data_waterfallchart2.csv"},
+    "transform": [
+      {"window": [{"op": "sum", "field": "amount", "as": "sum"}]},
+      {"window": [{"op": "lead", "field": "label", "as": "lead"}]},
+      {
+        "calculate": "datum.lead === null ? datum.label : datum.lead",
+        "as": "lead"
+      },
+      {
+        "calculate": "datum.label === 'End' ? 0 : datum.sum - datum.amount",
+        "as": "previous_sum"
+      },
+      {
+        "calculate": "datum.label === 'End' ? datum.sum : datum.amount",
+        "as": "amount"
+      },
+      {
+        "calculate": "(datum.label !== 'Begin' && datum.label !== 'End' && datum.amount > 0 ? '+' : '') + datum.amount",
+        "as": "text_amount"
+      },
+      {"calculate": "(datum.sum + datum.previous_sum) / 2", "as": "center"},
+      {
+        "calculate": "datum.sum < datum.previous_sum ? datum.sum : ''",
+        "as": "sum_dec"
+      },
+      {
+        "calculate": "datum.sum > datum.previous_sum ? datum.sum : ''",
+        "as": "sum_inc"
+      }
+    ],
+    "encoding": {
+      "x": {
+        "field": "label",
+        "type": "ordinal",
+        "sort": null,
+        "axis": {"labelAngle": 0, "title": "Year"}
+      }
+    },
+    "layer": [
+      {
+        "mark": {"type": "bar", "size": 45},
+        "encoding": {
+          "y": {
+            "field": "previous_sum",
+            "type": "quantitative",
+            "title": "Expenditure Percentage in Malaysia (%)",
+            "scale": {"domain": [0, 5]}
+          },
+          "y2": {"field": "sum"},
+          "color": {
+            "condition": [
+              {
+                "test": "datum.label === 'Begin' || datum.label === 'End'",
+                "value": "#f7e0b6"
+              },
+              {"test": "datum.sum < datum.previous_sum", "value": "#f78a64"}
+            ],
+            "value": "#5f9ed1"
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "rule",
+          "color": "#404040",
+          "opacity": 1,
+          "strokeWidth": 2,
+          "xOffset": -22.5,
+          "x2Offset": 22.5
+        },
+        "encoding": {
+          "x2": {"field": "lead"},
+          "y": {"field": "sum", "type": "quantitative"}
+        }
+      },
+      {
+        "mark": {"type": "text", "dy": -4, "baseline": "bottom"},
+        "encoding": {
+          "y": {"field": "sum_inc", "type": "quantitative"},
+          "text": {"field": "sum_inc", "type": "nominal", "format":".2f"},
+          "opacity": {
+            "condition": {
+                "test": "datum.sum_inc == 0.00", "value": 0
+            }, "value":1
+            }
+        }
+      },
+      {
+        "mark": {"type": "text", "dy": 4, "baseline": "top"},
+        "encoding": {
+          "y": {"field": "sum_dec", "type": "quantitative"},
+          "text": {"field": "sum_dec", "type": "nominal","format":".2f"},
+          "opacity": {
+            "condition": {
+                "test": "datum.sum_dec == 0.00", "value": 0
+            }, "value":1
+            }
+        }
+      },
+      {
+        "mark": {"type": "text", "fontWeight": "bold", "baseline": "middle"},
+        "encoding": {
+          "y": {"field": "center", "type": "quantitative"},
+          "text": {"field": "text_amount", "type": "nominal","format": ".2f"},
+          "color": {
+            "condition": [
+              {
+                "test": "datum.label === 'Begin' || datum.label === 'End'",
+                "value": "#725a30"
+              }
+            ],
+            "value": "white"
+          }
+        }
+      }
+    ],
+    "config": {"text": {"fontWeight": "bold", "color": "#404040"}}
+  }

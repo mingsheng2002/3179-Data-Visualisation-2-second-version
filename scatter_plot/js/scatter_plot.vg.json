@@ -1,0 +1,164 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "config": {"legend": {"orient": "none", "legendX": 50, "legendY":15}},
+    "data": {"url": "https://raw.githubusercontent.com/mingsheng2002/3179-Data-Visualisation-Project-2/main/scatter_plot/js/Life%20Expectancy%20Data_scatterplot.json"},
+    "width": 570,
+    "height": 400,
+    "layer": [
+      {
+        "transform": [
+          {"filter": {"field": "Country", "equal": "Afghanistan"}},
+          {"filter": {"param": "Year"}}
+        ],
+        "mark": {
+          "type": "text",
+          "fontSize": 100,
+          "x": 272,
+          "y": 205,
+          "opacity": 0.075
+        },
+        "encoding": {"text": {"field": "Year"}}
+      },
+      {
+        "transform": [
+          {
+            "lookup": "cluster",
+            "from": {
+              "key": "id",
+              "fields": ["name"],
+              "data": {
+                "values": [
+                  {"id": 0, "name": "Africa"},
+                  {"id": 1, "name": "Asia"},
+                  {"id": 2, "name": "Australia"},
+                  {"id": 3, "name": "Europe"},
+                  {"id": 4, "name": "North America"},
+                  {"id": 5, "name": "South America"}
+                ]
+              }
+            }
+          }
+        ],
+        "encoding": {
+          "x": {
+            "field": "Schooling (years)",
+            "type": "quantitative",
+            "scale": {"domain": [0, 21]},
+            "axis": {"tickCount": 5, "title": "Schooling (years)"}
+          },
+          "y": {
+            "field": "BMI",
+            "type": "quantitative",
+            "scale": {"domain": [0,80]},
+            "axis": {"tickCount": 5, "title": "BMI"}
+          }
+        },
+        "layer": [
+          {
+            "mark": {
+              "type": "line",
+              "size": 4,
+              "color": "lightslategray",
+              "strokeCap": "round"
+            },
+            "encoding": {
+              "detail": {"field": "Country"},
+              "order": {"field": "Year"},
+              "opacity": {
+                "condition": {
+                  "test": {"or": [
+                    {"param": "hovered", "empty": false},
+                    {"param": "clicked", "empty": false}
+                  ]},
+                  "value": 0.8
+                },
+                "value": 0
+              }
+            }
+          },
+          {
+            "params": [
+              {
+                "name": "Year",
+                "value": [{"Year": 2000}],
+                "select": {
+                  "type": "point",
+                  "fields": ["Year"]
+                },
+                "bind": {
+                  "name": "Year ",
+                  "input": "range",
+                  "min": 2000, "max": 2015, "step": 1
+                }
+              },
+              {
+                "name": "hovered",
+                "select": {
+                  "type": "point",
+                  "fields": ["Country"],
+                  "toggle": false,
+                  "on": "mouseover"
+                }
+              },
+              {
+                "name": "clicked",
+                "select": {"type": "point", "fields": ["Country"]}
+              }
+            ],
+            "transform": [{"filter": {"param": "Year"}}],
+            "mark": {"type": "circle", "size": 100, "opacity": 0.8},
+            "encoding": {"color": {"field": "name", "title": "Continent",
+              "scale": {
+                "domain":["Africa","Asia","Australia","Europe","North America","South America"],
+                "range":["#08306b","#2171b5","#9ecae1","#fdd0a2","#f16913","#a63603"]
+                }
+              }
+            }
+          },
+          {
+            "transform": [
+              {
+                "filter": {
+                  "and": [
+                    {"param": "Year"},
+                    {"or": [
+                      {"param": "clicked", "empty": false},
+                      {"param": "hovered", "empty": false}
+                    ]}
+                  ]
+                }
+              }
+            ],
+            "mark": {
+              "type": "text",
+              "yOffset": -12,
+              "fontSize": 12,
+              "fontWeight": "bold"
+            },
+            "encoding": {
+              "text": {"field": "Country"},
+              "color": {"field": "name", "title": "Continent"}
+            }
+          },
+          {
+            "transform": [
+              {"filter": {"param": "hovered", "empty": false}},
+              {"filter": {"not": {"param": "Year"}}}
+            ],
+            "layer": [
+              {
+                "mark": {
+                  "type": "text",
+                  "yOffset": -12,
+                  "fontSize": 12,
+                  "color": "gray"
+                },
+                "encoding": {"text": {"field": "Year"}}
+              },
+              {"mark": {"type": "circle", "color": "gray"}}
+            ]
+          }
+        ]
+      }
+    ]
+  }
