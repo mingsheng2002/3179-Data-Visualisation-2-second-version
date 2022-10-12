@@ -1,0 +1,58 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Vega-Lite version of bar chart from https://observablehq.com/@d3/learn-d3-scales.",
+    "width": 400,
+    "data": {"url": "https://raw.githubusercontent.com/mingsheng2002/3179-Data-Visualisation-Project-2/main/bar_chart/js/Life%20Expectancy%20Data_barchart_topbottom10.json"},
+    "transform": [
+        {
+            "joinaggregate": [{
+              "op": "mean",
+              "field": "Average",
+              "as": "AverageRating"
+            }]}
+    ],
+    "encoding": {
+        "x": {"field": "Average life expectancy (age)", "type": "quantitative", "title": "Average life expectancy (age)"},
+        "y": {"field": "Country", "type": "nominal",
+              "sort":["Japan","Sweden","Iceland","Switzerland","France","Italy","Spain","Australia","Norway","Canada",
+                      "Nigeria","eSwatini","Zimbabwe","Chad","Ivory Coast","Malawi","Angola","Lesotho","Central African Republic","Sierra Leone"]
+            }
+    },
+    "layer": [
+        {
+            "mark": {"type":"bar", "cornerRadiusEnd":5},
+            "encoding": {
+            "color": {
+                "condition": 
+                    {"test": "datum['Average life expectancy (age)'] >= datum.Average", "value":"#3690c0"},
+                     "value": "#fd8d3c"
+            }}
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "right",
+                "xOffset": -4,
+                "aria": false
+            },
+            "encoding": {
+                "text": {"field": "Average life expectancy (age)", "type": "quantitative", "format": ".2f"},
+                "color": {
+                    "condition": {
+                        "test": "datum['Average life expectancy (age)'] >= datum.Average", "value":"white"},
+                        "value": "black"
+                }
+            }
+        },
+        {
+            "mark": {"type": "line", "color": "green", "size": 2.5},
+            "encoding": {
+                "x": {
+                    "aggregate": "average",
+                    "field": "AverageRating",
+                    "type": "quantitative"
+                }
+            }
+        }
+    ]
+  }
