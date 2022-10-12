@@ -53,6 +53,20 @@
                     "type": "quantitative"
                 }
             }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "dy": 100,
+                "yOffset": 50,
+                "xOffset": -10,
+                "fontStyle": "italic"
+            },
+            "encoding": {
+                "text": {"value": "Average: 69.22"},
+                "color": {"value":"green"},
+                "opacity": {"condition":{"test": "datum.Country == 'Australia'", "value":1}, "value":0}
+            }
         }
     ]
   }
