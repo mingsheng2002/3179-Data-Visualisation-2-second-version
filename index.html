@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/grids-responsive-min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="styles.css" media="all">
+
+    <title>FIT3179 Data Visualisation 2</title>
+</head>
+
+<body>
+
+    <div class="pure-g">
+
+
+        <div class="pure-u-1">
+            <img src="https://www.cdc.gov/nchs/images/nvss/19-310621_life_expectancy_banner.jpg?_=77022">
+        </div>
+
+
+            <div class="pure-u-1">
+                <div id="title">
+                    LIFE EXPECTANCY
+                </div>
+            </div>
+
+            <div class="pure-u-1-6">
+                <img src="https://cdn-icons-png.flaticon.com/512/1518/1518637.png">
+            </div>
+            <div class="pure-u-1-3">
+                <div id="title_description">
+                    <p>
+                        Life expectancy is the <span id="bold">number of years</span> an individual can<br>
+                        <span id="bold">expect to live</span>. <br><br>
+
+                        The data in this chosen dataset was collected from the<br>
+                        Global Health Observatory (GHO) data repository under<br>
+                        the World Health Organization (WHO) and from United<br>
+                        Nation website.
+                        <br><br>
+                    </p>
+                </div>
+            </div>
+            <div class="pure-u-1-3">
+                <div id="title_description">
+                    <p>
+                        This dataset contains data from year <span id="bold">2000 to 2015</span> for <span id="bold">193</span><br>
+                        <span id="bold">countries</span> for further analysis.<br><br>
+
+                        All the predicting variables in this dataset had been divided<br>
+                        into several broad categories, such as <span id="bold">Immunization</span>
+                        related factors, <span id="bold">mortality</span> factors, <span id="bold">economical</span> factors, and also <span id="bold">social</span> factors.
+                        <br><br>
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="pure-u-1-6">
+                <img src="https://cdn-icons-png.flaticon.com/512/7059/7059724.png">
+            </div>
+
+
+            <h1>_____________________________________________________________________________________________________________</h1>
+        
+
+            <div class="pure-u-1-2">
+                <div class="pure-u-1-8">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3840/3840653.png">
+                </div>
+                <div class="pure-u-3-4">
+                    <h4>
+                        COUNTRIES WITH THE TEN <span style="color: #3690c0">HIGHEST</span> AND <span style="color: #fd8d3c">LOWEST</span>
+                        AVERAGE LIFE EXPECTANCY RESPECTIVELY ACROSS THE WORLD FROM YEAR 2000 TO 2015
+                        <br><br>
+                    </h4>
+                </div>
+                <p>
+                    --- Caption --- <br><br>
+                </p>
+                <div id="bar_chart"></div>
+            </div>
+            <div class="pure-u-1-2">
+                <div class="pure-u-1-8">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3840/3840738.png">
+                </div>
+                <div class="pure-u-3-4">
+                    <h4>
+                        DISTRIBUTION OF COUNTRIES WITH LIFE EXPECTANCY <span style="color: #3690c0">ABOVE</span> AND <span style="color: #fd8d3c">BELOW</span>
+                        AVERAGE ACROSS DIFFERENT CONTINENTS
+                        <br><br>
+                    </h4>
+                </div>
+                <p>
+                    --- Caption --- <br><br>
+                </p>
+                <div id="unit_stacked_chart"></div>
+            </div>
+
+
+            <div class="pure-u-1-2">
+                <div class="pure-u-1-8">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3840/3840739.png">
+                </div>
+                <div class="pure-u-3-4">
+                    <h4>
+                        ZOOMABLE CHOROPLETH MAP SHOWING THE <span style="color: #fd8d3c">ADULT MORTALITY RATE</span> IN DIFFERENT COUNTRIES
+                        ACROSS THE WORLD FROM YEAR 2000 TO 2015
+                        <br><br>
+                    </h4>
+                </div>
+                <p>
+                    --- Caption --- <br><br>
+                </p>
+                <div id="choropleth_map"></div>
+            </div>
+            <div class="pure-u-1-2">
+                <div class="pure-u-1-8">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3840/3840753.png">
+                </div>
+                <div class="pure-u-3-4">
+                    <h4>
+                        RANKING AMONG THE COUNTRIES WITH THE TEN HIGHEST AVERAGE LIFE EXPECTANCY OVER THE YEARS<br>
+                        <br><br>
+                    </h4>
+                </div>
+                <p>
+                    --- Caption --- <br><br>
+                </p>
+                <div id="bump_chart"></div>
+            </div>
+
+
+            <div class="pure-u-1-2">
+                <div class="pure-u-1-8">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3840/3840754.png">
+                </div>
+                <div class="pure-u-3-4">
+                    <h4>
+                        IMMUNIZATION COVERAGE OF <span style="color: #3690c0">DIPHTHERIA</span> AND <span style="color: #fd8d3c">HEPATITIS B</span>
+                        IN AUSTRALIA AND FIVE OTHER COUNTRIES WITH THE LOWEST AVERAGE LIFE EXPECTANCY OVER THE YEARS
+                        <br><br>
+                    </h4>
+                </div>
+                <p>
+                    --- Caption --- <br><br>
+                </p>
+                <div id="heatmap_1"></div>
+                <br><br><br>
+                <div id="heatmap_2"></div>
+            </div>
+            <div class="pure-u-1-2">
+                <div class="pure-u-1-8">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3840/3840755.png">
+                </div>
+                <div class="pure-u-3-4">
+                    <h4>
+                        COMPARISON BETWEEN TOTAL EXPENDITURE PERCENTAGE SPENT ON HEALTH SECTORS BY THE GOVERNMENT OF AUSTRALIA AND MALAYSIA OVER THE YEARS
+                        <br><br>
+                    </h4>
+                </div>
+                <p>
+                    --- Caption --- <br><br>
+                </p>
+                <!-- <div id="waterfall_chart_1"></div>
+                <div id="waterfall_chart_2"></div> -->
+            </div>
+
+
+            <div class="pure-u-1-2">
+                <div class="pure-u-1-8">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3840/3840771.png">
+                </div>
+                <div class="pure-u-3-4">
+                    <h4>
+                        DISTRIBUTION OF COUNTRIES IN BETWEEN DIFFERENT CONTINENTS AND HEALTH STATUSES BASED ON BMI INDEX<br>
+                        <br><br>
+                    </h4>
+                </div>
+                <p>
+                    --- Caption --- <br><br>
+                </p>
+                <div id="alluvial_diagram"></div>
+            </div>
+            <div class="pure-u-1-2">
+                <div class="pure-u-1-8">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3840/3840772.png">
+                </div>
+                <div class="pure-u-3-4">
+                    <h4>
+                        INTERACTIVE PLOT SHOWING RELATIONSHIP BETWEEN AVERAGE SCHOOLING DURATION WITH BMI INDEX ACROSS THE WORLD AND DISPLAYING TRENDS OVER TIME
+                        <br><br>
+                    </h4>
+                </div>
+                <p>
+                    --- Caption --- <br><br>
+                </p>
+                <div id="scatter_plot"></div>
+            </div>
+
+
+            <div class="pure-u-1-2">
+                <div class="pure-u-1-8">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3840/3840773.png">
+                </div>
+                <div class="pure-u-3-4">
+                    <h4>
+                        INFLUENCE OF ALCOHOL CONSUMPTION ON BMI INDEX <br>AND AVERAGE LIFE EXPECTANCY ACROSS THE WORLD<br>
+                        <br><br>
+                    </h4>
+                </div>
+                <p>
+                    --- Caption --- <br><br>
+                </p>
+                <div id="bubble_dash_plot"></div>
+            </div>
+            <div class="pure-u-1-2">
+                <div class="pure-u-1-8">
+                    <img src="https://cdn-icons-png.flaticon.com/512/6912/6912885.png">
+                </div>
+                <div class="pure-u-3-4">
+                    <h4>
+                        CHANGES IN THE AVERAGE <span style="color: #3690c0">LIFE EXPECTANCY</span>, <span style="color: #d33434">INFANT DEATH RATE</span>
+                        AND <span style="color: #e5864f">SCHOOLING DURATION</span> ACROSS THE WORLD FROM YEAR 2000 TO 2015
+                        <br><br>
+                    </h4>
+                </div>
+                <p>
+                    --- Caption --- <br><br>
+                </p>
+                <div id="trellis_area_chart"></div>
+            </div>
+
+
+            <div class="pure-u-1">
+                <div id="authorship">
+                    <p>
+                        Visualisation by Chong Ming Sheng (Student ID: 32202792)
+                        for FIT3179 Data Visualisation 2, Monash University Malaysia.
+                    </p>
+                </div>
+            </div>
+
+    </div>
+
+
+<script type="text/javascript">
+
+  var spec1 = "bar_chart/js/bar_chart.vg.json";
+  vegaEmbed('#bar_chart', spec1).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec2 = "unit_stacked_chart/js/unit_stacked_chart.vg.json";
+  vegaEmbed('#unit_stacked_chart', spec2).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  
+  var spec3 = "choropleth_map/js/choropleth_map.vg.json";
+  vegaEmbed('#choropleth_map', spec3).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec4 = "bump_chart/js/bump_chart.vg.json";
+  vegaEmbed('#bump_chart', spec4).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec5a = "heatmap/js/heatmap_dip.vg.json";
+  vegaEmbed('#heatmap_1', spec5a).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec5b = "heatmap/js/heatmap_hep.vg.json";
+  vegaEmbed('#heatmap_2', spec5b).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  
+  var spec6a = "waterfall_chart/js/waterfall_chart1.vg.json";
+  vegaEmbed('#waterfall_chart_1', spec6a).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec6b = "waterfall_chart/js/waterfall_chart2.vg.json";
+  vegaEmbed('#waterfall_chart_2', spec6b).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec7 = "alluvial_diagram/js/alluvial_diagram.vg.json";
+  vegaEmbed('#alluvial_diagram', spec7).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec8 = "scatter_plot/js/scatter_plot.vg.json";
+  vegaEmbed('#scatter_plot', spec8).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec9 = "bubble_dash_plot/js/bubble_dash_plot.vg.json";
+  vegaEmbed('#bubble_dash_plot', spec9).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  var spec10 = "trellis_area_chart/js/trellis_area_chart.vg.json";
+  vegaEmbed('#trellis_area_chart', spec10).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+</script>
+    
+</body>
+</html>
